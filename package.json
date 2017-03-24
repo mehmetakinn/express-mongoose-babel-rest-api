@@ -2,7 +2,7 @@
   "name": "express-mongoose-babel-rest-api",
   "version": "1.0.0",
   "scripts": {
-    "start": "babel-node ./bin/www"
+    "start": "nodemon ./bin/www --exec babel-node"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
     "body-parser": "1.16.0",
     "debug": "2.6.0",
     "express": "4.14.1",
-    "morgan": "1.7.0"
+    "morgan": "1.7.0",
+    "nodemon": "1.11.0"
   }
 }
