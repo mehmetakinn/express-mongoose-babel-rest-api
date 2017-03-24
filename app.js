@@ -2,17 +2,21 @@ import express from 'express';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
 
+import drivers from './routes/drivers';
+
 let app = express();
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use('/drivers', drivers);
+
 // catch 404 and forward to error handler
-app.use((req, res, next) => {
-  let err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+app.use(function(req, res) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    res.json({ err: err });
 });
 
 // error handler
@@ -23,7 +27,7 @@ app.use((err, req, res) => {
 
   // render the error page
   res.status(err.status || 500);
-  res.json('error');
+    res.json({ err: err });
 });
 
 export default app;
