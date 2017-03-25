@@ -1,0 +1,8 @@
+{
+  "db": {
+    "development": "mongodb://localhost/development",
+    "staging": "mongodb://localhost/staging",
+    "production": "mongodb://localhost/production",
+    "testMode": "mongodb://localhost/testMode"
+  }
+}

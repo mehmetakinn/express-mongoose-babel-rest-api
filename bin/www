@@ -82,4 +82,6 @@ server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
-
+if (process.env.TEST_MODE) {
+    module.exports = server;
+}

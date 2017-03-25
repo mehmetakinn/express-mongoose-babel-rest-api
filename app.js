@@ -6,10 +6,19 @@ import mongoose from 'mongoose';
 import drivers from './routes/drivers';
 import ride from './routes/ride';
 
+import config from './config/config'
+
 let app = express();
 
 // Connect to mongo db
-mongoose.connect('mongodb://localhost/development_db');
+if (process.env.TEST_MODE) {
+    mongoose.connect(config.db.testMode);
+} else {
+    let env = process.env.NODE_ENV || 'development';
+
+    mongoose.connect(config.db[env]);
+}
+
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
