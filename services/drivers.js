@@ -2,6 +2,11 @@ import DriverModel from './../models/drivers';
 import _ from 'lodash';
 
 /**
+ * Default count of nearest drivers
+ */
+const nearestDeriversCount = 3;
+
+/**
  * Driver Service
  */
 class DriverService {
@@ -38,8 +43,20 @@ class DriverService {
     list (options, callback) {
         options = options || {};
 
+        let limit = false;
+        if (options.limit) {
+            limit = options.limit;
+            delete options.limit;
+        }
+
         options.deletedAt = null;
-        DriverModel.find(options, callback);
+        let query = DriverModel.find(options);
+
+        if (limit) {
+            query.limit(limit);
+        }
+
+        query.exec(callback);
     }
 
     /**
@@ -85,6 +102,32 @@ class DriverService {
         }
 
         DriverModel.findByIdAndRemove(id, callback);
+    }
+
+    /**
+     * Get nearest drivers
+     */
+    getNearest (params, callback) {
+        if (_.isEmpty(params) || !params.latitude || !params.longitude) {
+            return callback({ message: 'Missing field' });
+        }
+
+        let options = {
+            location: {
+                '$near': {
+                    '$geometry': {
+                        type: 'Point',
+                        coordinates: [
+                            parseFloat(params.latitude),
+                            parseFloat(params.longitude)
+                        ]
+                    }
+                }
+            },
+            limit: +params.limit || nearestDeriversCount
+        };
+
+        this.list(options, callback);
     }
 }
 

@@ -1,11 +1,14 @@
 import express from 'express';
+import DeriverService from './../services/drivers';
 const router = express.Router();
 
 /**
  * GET /ride - Get nearest drivers
  */
 router.get('/', (req, res) => {
-    res.json({ err: null, data: null });
+    DeriverService.getNearest(req.query, (err, data) => {
+        res.json({ err: err, data: data });
+    });
 });
 
 export default router;
