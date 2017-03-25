@@ -3,10 +3,12 @@ import DeriverService from './../services/drivers';
 const router = express.Router();
 
 /**
- * Get all drivers
+ * GET /dirvers - Get all drivers
  */
 router.get('/', (req, res) => {
-    res.json({ err: null, data: {} });
+    DeriverService.list(req.query, (err, data) => {
+        res.json({ err: err, data: data });
+    });
 });
 
 /**

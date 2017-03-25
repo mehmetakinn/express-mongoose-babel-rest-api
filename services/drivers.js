@@ -14,6 +14,12 @@ class DriverService {
     get (id, callback) {
         DriverModel.findById(id, callback);
     }
+
+    list (options, callback) {
+        options = options || {};
+
+        DriverModel.find(options, callback);
+    }
 }
 
 /**
