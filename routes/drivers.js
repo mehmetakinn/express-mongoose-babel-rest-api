@@ -30,10 +30,12 @@ router.post('/', (req, res) => {
 });
 
 /**
- * Update drive by id
+ * PUT /drivers/:id - Update drive by id
  */
 router.put('/:id', (req, res) => {
-    res.json({ err: null, data: {} });
+    DeriverService.update(req.params.id, req.body, (err, data) => {
+        res.json({ err: err, data: data });
+    });
 });
 
 /**
