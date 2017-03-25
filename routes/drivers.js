@@ -10,10 +10,12 @@ router.get('/', (req, res) => {
 });
 
 /**
- * Get driver by id
+ * GET /drivers/:id - Get driver by id
  */
 router.get('/:id', (req, res) => {
-    res.json({ err: null, data: {} });
+    DeriverService.get(req.params.id, (err, data) => {
+        res.json({ err: err, data: data });
+    });
 });
 
 /**

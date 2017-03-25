@@ -10,6 +10,10 @@ class DriverService {
     create (params, callback) {
         DriverModel.create(params, callback);
     }
+
+    get (id, callback) {
+        DriverModel.findById(id, callback);
+    }
 }
 
 /**
