@@ -1,4 +1,5 @@
 import express from 'express';
+import DeriverService from './../services/drivers';
 const router = express.Router();
 
 /**
@@ -16,10 +17,12 @@ router.get('/:id', (req, res) => {
 });
 
 /**
- * Create new driver
+ * POST /drivers - Create new driver
  */
 router.post('/', (req, res) => {
-    res.json({ err: null, data: {} });
+    DeriverService.create(req.body, (err, data) => {
+        res.json({ err: err, data: data });
+    });
 });
 
 /**

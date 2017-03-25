@@ -12,8 +12,7 @@ const DriversSchema = new Schema({
     },
     location: {
         type: { type: String },
-        coordinates: [],
-        required: true
+        coordinates: []
     },
     createdAt: {
         type: Date,
@@ -31,4 +30,32 @@ const DriversSchema = new Schema({
 
 DriversSchema.index({ location: '2dsphere' });
 
+/**
+ * Create new driver
+ *
+ * @param params
+ * @param callback
+ */
+DriversSchema.statics.create = function(params, callback) {
+    if (!(params && params.name && params.latitude && params.longitude)) {
+        return callback({ message: 'Missing field' });
+    }
+
+    let options = {
+        name: params.name,
+        location: {
+            'type': 'Point',
+            'coordinates': [
+                parseFloat(params.latitude),
+                parseFloat(params.longitude)
+            ]
+        }
+    };
+
+    return new this(options).save(callback);
+};
+
+/**
+ * Export driver model
+ */
 export default mongoose.model('Drivers', DriversSchema);
