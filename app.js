@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 
 import drivers from './routes/drivers';
+import ride from './routes/ride';
 
 let app = express();
 
@@ -15,6 +16,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/drivers', drivers);
+app.use('/ride', ride);
 
 // catch 404 and forward to error handler
 app.use(function(req, res) {
