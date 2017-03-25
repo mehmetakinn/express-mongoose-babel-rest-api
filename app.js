@@ -1,10 +1,14 @@
 import express from 'express';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
+import mongoose from 'mongoose';
 
 import drivers from './routes/drivers';
 
 let app = express();
+
+// Connect to mongo db
+mongoose.connect('mongodb://localhost/development_db');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
