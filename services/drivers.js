@@ -16,20 +16,35 @@ class DriverService {
         DriverModel.create(params, callback);
     }
 
+    /**
+     * Get driver
+     */
     get (id, callback) {
         if (!id) {
             return callback({ message: 'Missing field' });
         }
 
-        DriverModel.findById(id, callback);
-    }
-
-    list (options, callback) {
-        options = options || {};
+        let options = {
+            _id: id,
+            deletedAt: null
+        };
 
         DriverModel.find(options, callback);
     }
 
+    /**
+     * List drivers
+     */
+    list (options, callback) {
+        options = options || {};
+
+        options.deletedAt = null;
+        DriverModel.find(options, callback);
+    }
+
+    /**
+     * Update driver
+     */
     update (id, params, callback) {
         if (!id || !params || _.isEmpty(params)) {
             return callback({ message: 'Missing field' });
@@ -37,7 +52,39 @@ class DriverService {
 
         params.updatedAt = new Date();
 
-        DriverModel.findByIdAndUpdate(id, { $set: params }, { new: true }, callback);
+        let options = {
+            _id: id,
+            deletedAt: null
+        };
+
+        DriverModel.update(options, { $set: params }, { new: true }, callback);
+    }
+
+    /**
+     * Delete driver
+     */
+    delete (id, callback) {
+        if (!id) {
+            return callback({ message: 'Missing field' });
+        }
+
+        let options = {
+            _id: id,
+            deletedAt: null
+        };
+
+        DriverModel.update(options, { $set: { deletedAt: new Date() } }, { new: true }, callback);
+    }
+
+    /**
+     * Permanently delete driver
+     */
+    permanentlyDelete (id, callback) {
+        if (!id) {
+            return callback({ message: 'Missing field' });
+        }
+
+        DriverModel.findByIdAndRemove(id, callback);
     }
 }
 

@@ -30,7 +30,7 @@ router.post('/', (req, res) => {
 });
 
 /**
- * PUT /drivers/:id - Update drive by id
+ * PUT /drivers/:id - Update driver by id
  */
 router.put('/:id', (req, res) => {
     DeriverService.update(req.params.id, req.body, (err, data) => {
@@ -39,10 +39,12 @@ router.put('/:id', (req, res) => {
 });
 
 /**
- * Delete drive by id
+ * DELETE /drivers/:id - Delete driver by id
  */
 router.delete('/:id', (req, res) => {
-    res.json({ err: null, data: {} });
+    DeriverService.delete(req.params.id, (err, data) => {
+        res.json({ err: err, data: data });
+    });
 });
 
 export default router;
