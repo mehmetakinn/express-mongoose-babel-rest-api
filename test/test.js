@@ -1,6 +1,7 @@
-const chai = require('chai');
-const should = chai.should();
+import chai from 'chai';
 import chaiHttp from 'chai-http';
+const should = chai.should();
+
 chai.use(chaiHttp);
 
 import server from './../bin/www';
@@ -8,7 +9,7 @@ import server from './../bin/www';
 describe('Endpoints', () => {
     describe('Drivers', () => {
         describe('Create driver', () => {
-            it('should missing field error', (done) => {
+            it('should return missing field error', (done) => {
                 chai.request(server)
                     .post('/drivers')
                     .end((err, res) => {

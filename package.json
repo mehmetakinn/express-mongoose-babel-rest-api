@@ -2,7 +2,7 @@
   "name": "express-mongoose-babel-rest-api",
   "version": "1.0.0",
   "scripts": {
-    "start": "NODE_ENV=development nodemon ./bin/www --exec babel-node PORT=3000",
+    "start": "NODE_ENV=development PORT=3000 nodemon ./bin/www --exec babel-node",
     "test": "TEST_MODE=true PORT=3003 mocha --compilers js:babel-core/register"
   },
   "repository": {

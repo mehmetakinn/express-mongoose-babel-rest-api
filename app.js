@@ -28,7 +28,7 @@ app.use('/drivers', drivers);
 app.use('/ride', ride);
 
 // catch 404 and forward to error handler
-app.use(function(req, res) {
+app.use((req, res) => {
     var err = new Error('Not Found');
     err.status = 404;
     res.json({ err: err });

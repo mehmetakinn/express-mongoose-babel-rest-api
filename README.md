@@ -18,6 +18,7 @@ MongoDB
   $ npm install
   $ npm start
 ```
+###### Note: Make sure mongodb is running on localhost 27017.
 Visit [http://localhost:3000](http://localhost:3000)
 
 ------
@@ -74,6 +75,12 @@ DELETE request to `/drivers/58d66cbbf3c1dc11a711ffb6` will delete driver
 GET request to `/ride?latitude=40.98300825&longitude=29.022789&limit=5` will return nearest 5 drivers.
 
 Note: limit is optional and default value is 3.
+
+------
+------
+
+## Live demo
+Live demo is hosted at heroku and available at: https://shrouded-tundra-42087.herokuapp.com
 
 ------
 ------
